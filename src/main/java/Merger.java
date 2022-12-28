@@ -2,6 +2,9 @@ import org.apache.pdfbox.multipdf.PDFMergerUtility;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,18 +15,10 @@ public class Merger {
         FileManager.projectMover();
 
         directories();
-
-/*        PDFMergerUtility ut = new PDFMergerUtility();
-        ut.addSource("C:\\Elecran\\3D-Constructor 7\\KM5\\TMP\\МВ С96 601Л\\МВ С96 601Л_KM_1_1.pdf");
-        ut.addSource("C:\\Elecran\\3D-Constructor 7\\KM5\\TMP\\МВ С96 601Л\\МВ С96 601Л_KM_1_2.pdf");
-        ut.addSource("C:\\Elecran\\3D-Constructor 7\\KM5\\TMP\\МВ С96 601Л\\МВ С96 601Л_KM_1_3.pdf");
-        ut.setDestinationFileName("C:\\Elecran\\3D-Constructor 7\\KM5\\TMP\\МВ С96 601Л\\МВ С96 601Л.pdf");
-        ut.mergeDocuments();*/
     }
 
     public static void directories() throws IOException {
         List<String> folderList = new ArrayList<>();
-        List<String> fileList = new ArrayList<>();
         String path = "C:\\Elecran\\3D-Constructor 7\\KM5\\TMP";
 
         File folder = new File(path);
@@ -35,10 +30,13 @@ public class Merger {
             String files = path + "\\" + dir;
             filesForMerging(files);
 
-            //System.out.println(files);
-
+            String dest = "D:\\_profile\\Desktop\\Типові меблі ЕЛКОН ДІЗАЙН\\ТИПОВІ КУХНІ\\верх\\МВ 96\\" + dir + "\\" + dir + ".pdf";
+            String dest2 = "D:\\_profile\\Desktop\\Типові меблі ЕЛКОН ДІЗАЙН\\ТИПОВІ КУХНІ\\верх\\МВ 96\\" + dir + "\\" + "Креслення PDF\\" + dir + ".pdf";
+            String name = files + ".pdf";
+            Files.copy(Path.of(name), Path.of(dest), StandardCopyOption.REPLACE_EXISTING);
+            Files.move(Path.of(name), Path.of(dest2), StandardCopyOption.REPLACE_EXISTING);
+            System.out.println(files);
             deleteDirectory(new File(files));
-
         }
 
         //System.out.println(folderList);
@@ -46,18 +44,17 @@ public class Merger {
 
 
     static public boolean deleteDirectory(File path) {
-        if( path.exists() ) {
+        if (path.exists()) {
             File[] files = path.listFiles();
-            for(int i=0; i<files.length; i++) {
-                if(files[i].isDirectory()) {
+            for (int i = 0; i < files.length; i++) {
+                if (files[i].isDirectory()) {
                     deleteDirectory(files[i]);
-                }
-                else {
+                } else {
                     files[i].delete();
                 }
             }
         }
-        return( path.delete() );
+        return (path.delete());
     }
 
     public static void filesForMerging(String path) throws IOException {
@@ -76,10 +73,9 @@ public class Merger {
             }
         }
 
-        ut.setDestinationFileName(path + ".pdf");
+        String name = path + ".pdf";
+        ut.setDestinationFileName(name);
         ut.mergeDocuments();
-
-
 
 
 /*        assert listOfFiles != null;
@@ -88,7 +84,6 @@ public class Merger {
                 fileList.add(file.getName());
             }
         }*/
-
 
 /*
         for (int i = 0; i < fileList.size(); i++) {
@@ -115,6 +110,4 @@ public class Merger {
         }*/
 
     }
-
-
 }
