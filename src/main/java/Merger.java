@@ -38,10 +38,8 @@ public class Merger {
             System.out.println(files);
             deleteDirectory(new File(files));
         }
-
         //System.out.println(folderList);
     }
-
 
     static public boolean deleteDirectory(File path) {
         if (path.exists()) {
@@ -76,38 +74,5 @@ public class Merger {
         String name = path + ".pdf";
         ut.setDestinationFileName(name);
         ut.mergeDocuments();
-
-
-/*        assert listOfFiles != null;
-        for (File file : listOfFiles) {
-            if (file.isFile()) {
-                fileList.add(file.getName());
-            }
-        }*/
-
-/*
-        for (int i = 0; i < fileList.size(); i++) {
-            String val = fileList.get(i);
-            int index = val.indexOf(".");
-            String folderName = val.substring(0, index);
-            System.out.println(val);
-            String directory = "C:\\Elecran\\3D-Constructor 7\\KM5\\TMP\\" + val;
-            String destination = "D:\\_profile\\Desktop\\Типові меблі ЕЛКОН ДІЗАЙН\\ТИПОВІ КУХНІ\\верх\\МВ 96\\" + folderName + "\\Файл розкрою матеріалу GibLab\\" + val;
-
-            System.out.println(directory);
-            System.out.println(destination);
-
-            Path source = Paths.get(directory);
-            Path target = Paths.get(destination);
-            try {
-
-                Files.move(source, target, REPLACE_EXISTING);
-                System.out.println("Success!!!\n");
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }*/
-
     }
 }
