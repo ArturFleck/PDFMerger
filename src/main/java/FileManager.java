@@ -10,15 +10,9 @@ import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 //https://stackoverflow.com/questions/3585329/how-to-merge-two-pdf-files-into-one-in-java
 public class FileManager {
-    public static void main(String[] args) throws IOException {
-        excelMover();
-        projectMover();
-    }
-    public static void excelMover(){
+    public static void excelMover(File pathFrom, String pathTo){
         List<String> fileList = new ArrayList<>();
-
-        File folder = new File("C:\\Test5\\3D-CON~1\\KM5\\Export");
-        File[] listOfFiles = folder.listFiles();
+        File[] listOfFiles = pathFrom.listFiles();
 
         assert listOfFiles != null;
         for (File file : listOfFiles) {
@@ -38,25 +32,25 @@ public class FileManager {
             //System.out.println(folderName);
             //System.out.println(fileName);
 
-            String directory = "C:\\Test5\\3D-CON~1\\KM5\\Export\\" + val + ".xls";
-            String destination = "D:\\_profile\\Desktop\\Типові меблі ЕЛКОН ДІЗАЙН\\ТИПОВІ КУХНІ\\верх\\МВ 96\\";
+            String directory = pathFrom + "/" + val + ".xls";   //name of file with path
 
+            String pathToMove= pathTo;
             if (folderName.equals("Відомість деталей")) {
-                destination = destination + fileName + "\\Відомість деталей\\" + val + ".xls";
+                pathToMove = pathTo + fileName + "/Відомість деталей/" + val + ".xls";
             }
             if (folderName.equals("Матеріали") || folderName.equals("Фурнітура")) {
-                destination = destination + fileName + "\\Матеріали і фурнітура для 1 С\\" + val + ".xls";
+                pathToMove = pathTo + fileName + "/Матеріали і фурнітура для 1 С/" + val + ".xls";
             }
 
-            System.out.println(directory);
-            System.out.println(destination);
+            System.out.println("from << " + directory);
+            System.out.println("to >> " + pathToMove);
 
             Path source = Paths.get(directory);
-            Path target = Paths.get(destination);
+            Path target = Paths.get(pathToMove);
             try {
 
                 Files.move(source, target, REPLACE_EXISTING);
-                System.out.println("Success!!!\n");
+                System.out.println("Excel Success!!!\n");
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -64,11 +58,10 @@ public class FileManager {
         }
     }
 
-    public static void projectMover(){
+    public static void projectMover(File pathFrom, String pathTo){
         List<String> fileList = new ArrayList<>();
 
-        File folder = new File("C:\\Elecran\\3D-Constructor 7\\KM5\\TMP");
-        File[] listOfFiles = folder.listFiles();
+        File[] listOfFiles = pathFrom.listFiles();
 
         assert listOfFiles != null;
         for (File file : listOfFiles) {
@@ -84,18 +77,18 @@ public class FileManager {
             int index = val.indexOf(".");
             String folderName = val.substring(0, index);
             System.out.println(val);
-            String directory = "C:\\Elecran\\3D-Constructor 7\\KM5\\TMP\\" + val;
-            String destination = "D:\\_profile\\Desktop\\Типові меблі ЕЛКОН ДІЗАЙН\\ТИПОВІ КУХНІ\\верх\\МВ 96\\" + folderName + "\\Файл розкрою матеріалу GibLab\\" + val;
+            String directory = pathFrom + "/" + val;
+            String destination = pathTo + folderName + "/Файл розкрою матеріалу GibLab/" + val;
 
-            System.out.println(directory);
-            System.out.println(destination);
+            System.out.println("from <- "+directory);
+            System.out.println("to -> "+destination);
 
             Path source = Paths.get(directory);
             Path target = Paths.get(destination);
             try {
 
                 Files.move(source, target, REPLACE_EXISTING);
-                System.out.println("Success!!!\n");
+                System.out.println("project moved Successfully!!!\n");
 
             } catch (IOException e) {
                 e.printStackTrace();
