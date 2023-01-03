@@ -8,11 +8,10 @@ public class LeadClass {
         String pathTo = "D:/_profile/Desktop/Типові меблі ЕЛКОН ДІЗАЙН/ТИПОВІ КУХНІ/основа верх/МВ 36/";
         File pathToMove = new File("D:/_profile/Desktop/Типові меблі ЕЛКОН ДІЗАЙН/ТИПОВІ КУХНІ/основа верх/МВ 36/");
 
-        FileManager.excelMover(pathFromExport, pathTo);
-        FileManager.projectMover(pathFromTMP,pathTo);
-        PDFMerger.mergePDF(pathFromTMP, pathTo);
+        //FileManager.excelMover(pathFromExport, pathTo);
+        //FileManager.projectMover(pathFromTMP,pathTo);
+        //PDFMerger.mergePDF(pathFromTMP, pathTo);
         //FileMover.dwgMover(pathToMove);
-        FileMover.mprMover(pathToMove);
-
+        //FileMover.mprMover(pathToMove);
     }
 }
