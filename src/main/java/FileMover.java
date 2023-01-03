@@ -9,7 +9,6 @@ import java.util.List;
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 public class FileMover {
-
     public static void mprMover(File pathFrom) {
         File[] listOfFolders = pathFrom.listFiles();
 
@@ -22,7 +21,7 @@ public class FileMover {
         }
     }
 
-    public static void move(File pathFrom, String name){
+    public static void move(File pathFrom, String name) {
         List<String> fileList = new ArrayList<>();
 
         File[] listOfFiles = pathFrom.listFiles();
@@ -38,39 +37,38 @@ public class FileMover {
 
         for (int i = 0; i < fileList.size(); i++) {
             String val = fileList.get(i);
-            int index = val.indexOf(".");
-            //String folderName = val.substring(0, index);
+            if (val.contains(".mpr")) {
+                System.out.println(val);
+                String directory = pathFrom + "/" + val;
+                String destination = pathFrom + "/Програма BHX/" + name + "/" + val;
 
-            System.out.println(val);
-            String directory = pathFrom + "/" + val;
-            String destination = pathFrom +"/Програма BHX/" + name + "/" + val;
+                System.out.println("from <- " + directory);
+                System.out.println("to -> " + destination);
 
-            System.out.println("from <- " + directory);
-            System.out.println("to -> " + destination);
+                Path source = Paths.get(directory);
+                Path target = Paths.get(destination);
+                try {
+                    File g = new File(pathFrom + "/" + "Програма BHX");
+                    if (!(g).exists()) {
+                        g.mkdir();
+                    }
 
-            Path source = Paths.get(directory);
-            Path target = Paths.get(destination);
-            try {
-                File g = new File(pathFrom + "/" + "Програма BHX");
-                if (!(g).exists()) {
-                    g.mkdir();
+                    File a = new File(g + "/" + name);
+                    if (!(a).exists()) {
+                        a.mkdir();
+                    }
+
+                    Files.move(source, target, REPLACE_EXISTING);
+                    System.out.println(".mpr moved Successfully!!!\n");
+
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-
-                File a = new File(g + "/" + name);
-                if (!(a).exists()) {
-                    a.mkdir();
-                }
-
-                Files.move(source, target, REPLACE_EXISTING);
-                System.out.println(".mpr moved Successfully!!!\n");
-
-            } catch (IOException e) {
-                e.printStackTrace();
             }
         }
     }
 
-    public static void objectMover(File pathFrom) {
+    public static void dwgMover(File pathFrom) {
         List<String> fileList = new ArrayList<>();
 
         File[] listOfFiles = pathFrom.listFiles();
@@ -86,38 +84,40 @@ public class FileMover {
 
         for (int i = 0; i < fileList.size(); i++) {
             String val = fileList.get(i);
-            int index = val.indexOf(".");
-            String folderName = val.substring(0, index);
+            if (val.contains(".dwg")) {
+                int index = val.indexOf(".");
+                String folderName = val.substring(0, index);
 
-            System.out.println(val);
-            String directory = pathFrom + "/" + val;
-            String destination = pathFrom +"/"+ folderName + "/AutoCad/" + val;
+                System.out.println(val);
+                String directory = pathFrom + "/" + val;
+                String destination = pathFrom + "/" + folderName + "/AutoCad/" + val;
 
-            System.out.println("from <- " + directory);
-            System.out.println("to -> " + destination);
+                System.out.println("from <- " + directory);
+                System.out.println("to -> " + destination);
 
-            Path source = Paths.get(directory);
-            Path target = Paths.get(destination);
-            try {
-                File g = new File(pathFrom+"/" + folderName);
-                if (!(g).exists()) {
-                    g.mkdir();
+                Path source = Paths.get(directory);
+                Path target = Paths.get(destination);
+
+                try {
+                    File g = new File(pathFrom + "/" + folderName);
+                    if (!(g).exists()) {
+                        g.mkdir();
+                    }
+
+                    File a = new File(g + "/AutoCad/");
+                    if (!(a).exists()) {
+                        a.mkdir();
+                    }
+
+                    Files.move(source, target, REPLACE_EXISTING);
+                    System.out.println("cad moved Successfully!!!\n");
+
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-
-                File a = new File(g + "/AutoCad/");
-                if (!(a).exists()) {
-                    a.mkdir();
-                }
-
-                Files.move(source, target, REPLACE_EXISTING);
-                System.out.println("cad moved Successfully!!!\n");
-
-            } catch (IOException e) {
-                e.printStackTrace();
             }
         }
     }
-
 }
 
 
