@@ -8,6 +8,7 @@ public class LeadClass {
         String pathTo = "D:/_profile/Desktop/Типові меблі ЕЛКОН ДІЗАЙН/ТИПОВІ КУХНІ/основа верх/МВ 72/";
         File pathToMove = new File(pathTo);
 
+
         DirectoriesCreator.mkDir(pathToMove);
 
         //FileManager.excelMover(pathFromExport, pathTo);
