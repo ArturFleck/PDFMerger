@@ -1,12 +1,16 @@
+import org.apache.commons.io.FileUtils;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
+import static org.apache.commons.io.FileUtils.deleteDirectory;
 
 public class FileMover {
     public static void mprMover(File pathFrom) {
@@ -118,6 +122,27 @@ public class FileMover {
             }
         }
     }
+
+    public static void programsMover(File pathFrom, File pathToMove) throws IOException {
+        File[] listOfFolders = pathFrom.listFiles();
+
+        assert listOfFolders != null;
+        for (File file : listOfFolders) {
+            if (file.isDirectory()) {
+                String dirName = pathFrom + "/" + file.getName();
+                String dirToDelete = pathToMove + "/" +  file.getName() +"/Програма BHX/" + file.getName()+"/";
+                File dir2 = new File(dirName);
+                File dirToGo2 = new File (dirToDelete);
+                //dirToGo2.delete();
+                FileUtils.deleteDirectory(dirToGo2);
+                Files.move(dir2.toPath(), dirToGo2.toPath());
+
+                System.out.println(file.getName() + "  moved");
+            }
+        }
+    }
+
+
 }
 
 
