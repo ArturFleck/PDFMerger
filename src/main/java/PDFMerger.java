@@ -13,14 +13,24 @@ public class PDFMerger {
         assert listOfFolders != null;
         for (String dir : listOfFolders) {
             String files = pathFrom + "/" + dir;
-            filesForMerging2(files);
+            //filesForMerging2(files);
 
             String dest = pathTo + dir + "/Ескізи для менеджера/" + dir + ".pdf";
             String dest2 = pathTo + dir + "/Креслення PDF/" + dir + ".pdf";
             String name = files + ".pdf";
 
+            /*
+            File p = new File(pathTo + dir + "/Ескізи для менеджера");
+            if (!(p).exists()) {
+                p.mkdir();
+            }
             Files.move(Path.of(name), Path.of(dest), StandardCopyOption.REPLACE_EXISTING);
+            */
             filesForMerging(files);
+            File g = new File(pathTo + dir + "/Креслення PDF");
+            if (!(g).exists()) {
+                g.mkdir();
+            }
             Files.move(Path.of(name), Path.of(dest2), StandardCopyOption.REPLACE_EXISTING);
 
             System.out.println(files);

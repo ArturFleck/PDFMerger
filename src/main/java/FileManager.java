@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
-
-//https://stackoverflow.com/questions/3585329/how-to-merge-two-pdf-files-into-one-in-java
 public class FileManager {
     public static void excelMover(File pathFrom, String pathTo){
         List<String> fileList = new ArrayList<>();
