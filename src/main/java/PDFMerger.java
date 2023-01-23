@@ -13,20 +13,20 @@ public class PDFMerger {
         assert listOfFolders != null;
         for (String dir : listOfFolders) {
             String files = pathFrom + "/" + dir;
-            //filesForMerging2(files);
+            filesForMerging2(files);
 
             String dest = pathTo + dir + "/Ескізи для менеджера/" + dir + ".pdf";
             String dest2 = pathTo + dir + "/Креслення PDF/" + dir + ".pdf";
             String name = files + ".pdf";
 
-            /*
             File p = new File(pathTo + dir + "/Ескізи для менеджера");
             if (!(p).exists()) {
                 p.mkdir();
             }
             Files.move(Path.of(name), Path.of(dest), StandardCopyOption.REPLACE_EXISTING);
-            */
+
             filesForMerging(files);
+
             File g = new File(pathTo + dir + "/Креслення PDF");
             if (!(g).exists()) {
                 g.mkdir();
@@ -46,7 +46,7 @@ public class PDFMerger {
 
         assert listOfFiles != null;
         for (File file : listOfFiles) {
-            if (file.isFile()) {
+            if (file.isFile() & !file.getName().contains("KM_2")) {
                 ut.addSource(path + "/" + file.getName());
             }
         }
@@ -63,9 +63,11 @@ public class PDFMerger {
         PDFMergerUtility ut = new PDFMergerUtility();
 
         assert listOfFiles != null;
-        for (int i = 1; i < listOfFiles.length; i++) {
-            if ((listOfFiles[i]).isFile()) {
-                ut.addSource(path + "/" + (listOfFiles[i]).getName());
+
+
+        for (File file : listOfFiles) {
+            if (file.isFile() & file.getName().contains("KM_2")) {
+                ut.addSource(path + "/" + file.getName());
             }
         }
 

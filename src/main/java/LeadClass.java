@@ -11,15 +11,15 @@ public class LeadClass {
         File pathToMove = new File(pathTo);
 
 
-        /*FileMover.dwgMover(pathToMove);
-        DirectoriesCreator.mkDir(pathToMove);
-        FileManager.excelMover(pathFromExport, pathTo);
-        FileManager.projectMover(pathFromTMP,pathTo);
-        PDFMerger.mergePDF(pathFromTMP, pathTo);*/
+        //FileMover.dwgMover(pathToMove);
+        //DirectoriesCreator.mkDir(pathToMove);
+        //FileManager.excelMover(pathFromExport, pathTo);
+        //FileManager.projectMover(pathFromTMP,pathTo);
+        PDFMerger.mergePDF(pathFromTMP, pathTo);
 
         //FileMover.mprMover(pathToMove);
 
-        FileMover.programsMover(pathFromPrograms,pathToMove);
+        //FileMover.programsMover(pathFromPrograms,pathToMove);
 
     }
 }
